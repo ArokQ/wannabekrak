@@ -63,7 +63,7 @@ public class KrakpersonFacadeREST extends AbstractFacade<Krakperson> {
     @Produces({"application/xml", "application/json"})
     @RolesAllowed({"krak-customer", "krak"})
     public Krakperson find(@PathParam("id") String id) {
-        CustomerRequest customer = em.find(CustomerRequest.class, ctx.getCallerPrincipal());
+        CustomerRequest customer = em.find(CustomerRequest.class, ctx.getCallerPrincipal().getName());
         customer.update();
         em.merge(customer);
         return em.find(Krakperson.class, id);
